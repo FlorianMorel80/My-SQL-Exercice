@@ -214,23 +214,72 @@ VALUES
 
 -- Exercice 2 
 -- Dans la table languages, afficher toutes les versions de PHP.
-    SELECT `PHP` FROM `languages`;
+    SELECT `version` FROM `languages` WHERE `language` = 'PHP';
 
 -- Exercice 3 
 -- Dans la table languages, afficher toutes les versions de PHP et de JavaScript.
+    SELECT `version` FROM `languages` WHERE `language` = 'PHP' OR `language` = 'JavaScript' ;
 
 -- Exercice 4 
 -- Dans la table languages, afficher toutes les lignes ayant pour id 3,5,7.
+    SELECT * FROM `languages` WHERE `id` = '3' OR `id` = '5' OR `id` = '7'; 
 
 -- Exercice 5 
 -- Dans la table languages, afficher les deux première entrées de JavaScript.
+    SELECT 'JavaScript' FROM `languages` LIMIT 2;
 
 -- Exercice 6 
 -- Dans la table languages, afficher toutes les lignes qui ne sont pas du PHP.
-
+    SELECT * FROM `languages` WHERE `language` != 'PHP';
 -- Exercice 7 
 -- Dans la table languages, afficher toutes les données par ordre alphabétique.
-
+    SELECT * FROM `languages` ORDER BY `language` ASC;
 -------------------------------------- END OF PARTIE 5  ----------------------------------
 
 
+
+---------------Partie 6 : Sélection de données - Élargir les possibilités de la clause WHERE
+-- Exercice 1
+-- Dans la table frameworks, afficher toutes les données de la table ayant une version 2.x (x étant un numéro quelconque).
+
+
+-- Exercice 2
+-- Dans la table frameworks, afficher toutes les lignes ayant pour id 1 et 3.
+
+
+-- Exercice 3
+-- Dans la table ide, afficher toutes les lignes ayant une date comprise entre le premier janvier 2010 et le 31 decembre 2011.
+
+-------------------------------------- END OF PARTIE 6  ----------------------------------
+
+
+
+-------------------------------- Partie 7 : Suppression et modification de données------------
+-- Exercice 1
+-- Dans la table languages, supprimer toutes les lignes parlant de HTML.
+
+-- Exercice 2
+-- Dans la table frameworks, modifier toutes les lignes ayant le framework Symfony par Symfony2.
+
+-- Exercice 3
+-- Dans la table languages, modifier la ligne du langage JavaScript version 5 par la version 5.1.
+
+-------------------------------------- END OF PARTIE 7  ----------------------------------
+
+
+
+----------------------------------- Partie 8 : Les jointures ---------------------------------
+
+-- Exercice 1
+-- Afficher tous les frameworks associés à leurs langages. Si un langage n'a pas de framework l'afficher aussi.
+
+-- Exercice 2
+-- Afficher tous les frameworks associés à leurs langages. Si un langage n'a pas de framework ne pas l'afficher.
+
+-- Exercice 3
+-- Afficher le nombre de framework qu'a un langage.
+
+-- Exercice 4
+-- Afficher les langages ayant plus de 3 frameworks.
+
+-------------------------------------- END OF PARTIE 8  ----------------------------------
