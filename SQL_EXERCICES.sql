@@ -139,7 +139,7 @@ ALTER TABLE `frameworks`
 -- Exercice 5
 -- Dans la base de données webDevelopment, dans la table frameworks changer le type de la colonne version en VARCHAR de taille 10.
 ALTER TABLE `frameworks`
-    MODIFY `version` VARCHAR(10);
+    MODIFY `version` VARCHAR(20);
     -- OU 
     -- CHANGE `version` `version` VARCHAR(10);
 
@@ -241,11 +241,11 @@ VALUES
 ---------------Partie 6 : Sélection de données - Élargir les possibilités de la clause WHERE
 -- Exercice 1
 -- Dans la table frameworks, afficher toutes les données de la table ayant une version 2.x (x étant un numéro quelconque).
-
+    SELECT * FROM `frameworks` WHERE `version` >= '2.' OR `version` <= '2.9';
 
 -- Exercice 2
 -- Dans la table frameworks, afficher toutes les lignes ayant pour id 1 et 3.
-
+    SELECT * FROM `frameworks` WHERE `id` = '1' OR `id` = '3';
 
 -- Exercice 3
 -- Dans la table ide, afficher toutes les lignes ayant une date comprise entre le premier janvier 2010 et le 31 decembre 2011.
