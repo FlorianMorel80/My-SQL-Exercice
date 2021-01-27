@@ -185,7 +185,7 @@ ALTER TABLE `clients`
 --     PHP, version 7
 
 
-USE webDevelopment;
+USE `webDevelopment`;
 INSERT INTO `languages` (`language`, `version`) 
 VALUES 
     ('JavaScript', 'version 5'),
@@ -224,26 +224,29 @@ INSERT INTO `frameworks` (`framework`, `version`)
 
 -- Exercice 2 
 -- Dans la table languages, afficher toutes les versions de PHP.
-    SELECT `version` FROM `languages` WHERE `language` = 'PHP';
+    SELECT * FROM `languages` WHERE `language` = 'PHP';
 
 -- Exercice 3 
 -- Dans la table languages, afficher toutes les versions de PHP et de JavaScript.
-    SELECT `version` FROM `languages` WHERE `language` = 'PHP' OR `language` = 'JavaScript' ;
+    SELECT * FROM `languages` WHERE `language` = 'PHP' OR `language` = 'JavaScript' ;
 
 -- Exercice 4 
 -- Dans la table languages, afficher toutes les lignes ayant pour id 3,5,7.
     SELECT * FROM `languages` WHERE `id` = '3' OR `id` = '5' OR `id` = '7'; 
+    -- OU 
+    -- SELECT * FROM `languages` WHERE `id` IN (3,5,7); 
 
 -- Exercice 5 
 -- Dans la table languages, afficher les deux première entrées de JavaScript.
-    SELECT 'JavaScript' FROM `languages` LIMIT 2;
+    SELECT * FROM `languages` WHERE `language` = 'JavaScript' LIMIT 2;
 
 -- Exercice 6 
 -- Dans la table languages, afficher toutes les lignes qui ne sont pas du PHP.
     SELECT * FROM `languages` WHERE `language` != 'PHP';
+    -- SELECT * FROM `languages` WHERE `language` <> 'PHP';
 -- Exercice 7 
 -- Dans la table languages, afficher toutes les données par ordre alphabétique.
-    SELECT * FROM `languages` ORDER BY `language` ASC;
+    SELECT * FROM `languages` ORDER BY `language`;
 -------------------------------------- END OF PARTIE 5  ----------------------------------
 
 
@@ -268,11 +271,12 @@ INSERT INTO `webDevelopment`.`ide` (`name`, `version`, `date`) VALUES ('NetBeans
 INSERT INTO `webDevelopment`.`ide` (`name`, `version`, `date`) VALUES ('NetBeans', '8.2', '2016-10-03');
 -- Exercice 1
 -- Dans la table frameworks, afficher toutes les données de la table ayant une version 2.x (x étant un numéro quelconque).
+    ALTER TABLE `frameworks` MODIFY `version` VARCHAR(20);
     SELECT * FROM `frameworks` WHERE `version` LIKE 'version 2.%';
 
 -- Exercice 2
 -- Dans la table frameworks, afficher toutes les lignes ayant pour id 1 et 3.
-    SELECT * FROM `frameworks` WHERE `id`IN ('1', '3');
+    SELECT * FROM `frameworks` WHERE `id` IN ('1', '3');
 
 -- Exercice 3
 -- Dans la table ide, afficher toutes les lignes ayant une date comprise entre le premier janvier 2010 et le 31 decembre 2011.
@@ -371,12 +375,22 @@ SELECT `frameworks`.`name`,`languages`.`name` FROM `languages` LEFT JOIN `framew
 -- Afficher tous les frameworks associés à leurs langages. Si un langage n'a pas de framework ne pas l'afficher.
 SELECT `frameworks`.`name`, `languages`.`name` FROM `languages` RIGHT JOIN `frameworks`
     ON `frameworks`.`languagesId` = `languages`.`id`;
+
+    -- DANS LE CAS OU IL Y AVAIT UN NULL DANS LANBUAGE, IL VAUT MIEUX UTILISER INNER JOIN
+SELECT `languages`.`name` FROM `languages` INNER JOIN `frameworks`
+    ON `frameworks`.`languagesId` = `languages`.`id`;
+
 -- Exercice 3
 -- Afficher le nombre de framework qu'a un langage.
-SELECT COUNT `framework` FROM `frameworks` GROUP BY `language`;
+-- Affiche le nombre de framework dans la talbe frmaeworks que peut avoir un language, en associant la table frameworks à la table languages sur l'id de frameworks qui est = à l'id de languages et group moi ça par rapport à la colonnez language
+
+SELECT COUNT(`frameworks`.`name`), `languages`.`name` FROM `languages` LEFT JOIN `frameworks`
+    ON `frameworks`.`languagesId` = `languages`.`id` GROUP BY `languages`.`name`;
 
 -- Exercice 4
 -- Afficher les langages ayant plus de 3 frameworks.
+SELECT COUNT(`frameworks`.`name`), `languages`.`name` FROM `languages` INNER JOIN `frameworks`
+    ON `frameworks`.`languagesId` = `languages`.`id` GROUP BY `languages`.`name` HAVING COUNT(`frameworks`.`name`) > 3;
 
 -------------------------------------- END OF PARTIE 8  ----------------------------------
 
